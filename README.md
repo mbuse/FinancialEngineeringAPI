@@ -16,7 +16,7 @@ which are based on any kind of calculations using this API. If your investment d
 as calculated this may have two different reasons:
 
  1. No software is bug free. And so isn't this API.
- 2. This API is based on financial models. And the propability that these financial models are absolutely
+ 2. This API is based on financial models. And the probability that these financial models are absolutely
     nonsense is even higher than the propability that this API contains bugs.
 
 
