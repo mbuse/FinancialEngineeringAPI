@@ -4,6 +4,7 @@
  */
 package de.mbuse.finance.binominal.security;
 
+import de.mbuse.finance.binominal.Binominal;
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.Security;
 
@@ -53,6 +54,28 @@ public class Swap implements Security {
       Double coupon = rate - strike;
       return (coupon + qu * su + qd * sd) / (1.0 + rate);
     }
+  }
+  
+  /** returns the payments of the swap 
+   *
+   * Payments are arreal... that means: a payment p(t) is caluclated with the
+   * rates at time t, but is paid out in the next period t+1.
+   * 
+   * Therefore the payment at time (t, u) is:
+   * 
+   * P(t,u) = (rate(t,u) - strike)/(1 + rate(t,u)).
+   */
+  public Binominal<Double> getPayments() {
+    return new Binominal<Double>() {
+
+      @Override
+      public String toString() { return "Payments of " + Swap.this;  }
+
+      public Double getValue(int t, int u) {
+        Double rate = lattice.getRate().getRate(t, u);
+        return  (rate - strike)/(1.0 + rate);
+      }
+    };
   }
 
   @Override

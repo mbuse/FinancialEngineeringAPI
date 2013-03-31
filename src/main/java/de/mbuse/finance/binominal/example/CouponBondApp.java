@@ -12,6 +12,7 @@ import de.mbuse.finance.binominal.rate.Rate;
 import de.mbuse.finance.binominal.rate.ShortRate;
 import de.mbuse.finance.binominal.security.CouponPayingBond;
 import de.mbuse.finance.binominal.security.Future;
+import de.mbuse.finance.binominal.security.ZeroCouponBond;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -52,6 +53,13 @@ public class CouponBondApp {
     Util.printLattice(futureOnCpb, MONEY_FMT, 6);
     System.out.println("Future Price: " + MONEY_FMT.format(futureOnCpb.getPrice()));
     
+    // === Using Coupon Paying Bonds with coupon 0 for calculating ZCB prices...
+    
+    ZeroCouponBond zcb = new ZeroCouponBond(lattice, 100.0, 6);
+    System.out.println("ZCB price            : " + MONEY_FMT.format(zcb.getPrice()));
+    
+    CouponPayingBond cpbZeroCoupon = new CouponPayingBond(lattice, 100.0, 0.0, 6);
+    System.out.println("CPB (coupon=0) price : " + MONEY_FMT.format(cpbZeroCoupon.getPrice()));
     
     
   }

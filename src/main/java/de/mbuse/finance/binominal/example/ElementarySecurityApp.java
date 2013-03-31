@@ -10,6 +10,7 @@ import de.mbuse.finance.binominal.lattice.TermStructureLatticeConfiguration;
 import de.mbuse.finance.binominal.lattice.Util;
 import de.mbuse.finance.binominal.security.CouponPayingBond;
 import de.mbuse.finance.binominal.security.ElementarySecurity;
+import de.mbuse.finance.binominal.security.Swap;
 import de.mbuse.finance.binominal.security.ZeroCouponBond;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -34,7 +35,7 @@ public class ElementarySecurityApp {
   
   
   public static void main(String... args) {
-    LatticeConfiguration lattice = new TermStructureLatticeConfiguration(UP, DOWN, Q, RATE_0);
+    final LatticeConfiguration lattice = new TermStructureLatticeConfiguration(UP, DOWN, Q, RATE_0);
     
     System.out.println("Lattice: " + lattice);
     
@@ -82,7 +83,26 @@ public class ElementarySecurityApp {
     
     System.out.println("Coupon Bond Price (Elementary Security Pricing)    : " + MONEY_FMT.format(esec.calculatePrice(cpbPayoffs, MATURITY)));
     System.out.println("Coupon Bond Price (Coupon Paying Bond calculation) : " + MONEY_FMT.format(cpb.getPrice()));  
+
+    final double fixed = 0.05;
+    final double nominal = 1000000.;
     
+    Swap swap = new Swap(lattice, fixed, 3);
+    Util.printLattice(swap, PERCENT_FMT, 3);
+    Util.printPrice("Swap Price", swap.getPrice() * nominal);
     
+    Binominal<Double> forwardSwap = new Binominal<Double>() {
+      public Double getValue(int t, int u) {
+        if (t>=1 && t <3) {
+          Double rate = lattice.getRate().getRate(t, u);
+          return  (rate-fixed)/(1.0 + rate);
+        }
+        else {
+          return 0.0;
+        }
+      }
+    };
+    Util.printLattice(forwardSwap, PERCENT_FMT, 5);
+    Util.printPrice("Forward Swap Price", nominal * esec.calculatePrice(forwardSwap, 3));
   }
 }

@@ -48,27 +48,27 @@ public class TermStructureApp {
     
     Option americanZeroOption = new Option(zcb, 88.0, 3, Option.Type.PUT, Option.Region.AMERICAN);
     Util.printLattice(americanZeroOption, MONEY_FMT, 5);
-    System.out.println("Price: " + americanZeroOption.getPrice());
+    Util.printPrice("Price", americanZeroOption);
     
     Option euroZeroOption = new Option(zcb, 84.0, 2, Option.Type.CALL, Option.Region.EUROPEAN);
     Util.printLattice(euroZeroOption, MONEY_FMT, 5);
-    System.out.println("Price: " + euroZeroOption.getPrice());
+    Util.printPrice("Price", euroZeroOption);
     
     Caplet caplet = new Caplet(lattice, 0.02, 6);
     Util.printLattice(caplet, PERCENT_FMT, 6);
-    System.out.println("Price: " + caplet.getPrice());
+    Util.printPrice("Price",caplet.getPrice());
     
     Floorlet floorlet = new Floorlet(lattice, 0.10, 6);
     Util.printLattice(floorlet, PERCENT_FMT, 6);
-    System.out.println("Price: " + floorlet.getPrice());
+    Util.printPrice("Price", floorlet.getPrice());
     
     Swap swap = new Swap(lattice, .05, 6);
     Util.printLattice(swap, PERCENT_FMT, 6);
-    System.out.println("Price: " + swap.getPrice());
+    Util.printPrice("Price:", swap.getPrice());
     
     Option swaption = new Option(swap, 0.0, 3, Option.Type.CALL, Option.Region.EUROPEAN);
     Util.printLattice(swaption, PERCENT_FMT, 4);
-    System.out.println("Price: " + swaption.getPrice());
+    Util.printPrice("Price: ", swaption.getPrice());
   }
   
 }

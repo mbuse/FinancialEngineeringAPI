@@ -6,13 +6,19 @@ package de.mbuse.finance.binominal.lattice;
 
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.Binominal;
+import de.mbuse.finance.binominal.Security;
 import java.text.Format;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  *
  * @author mbuse
  */
 public class Util {
+  
+  public static final NumberFormat MONEY_FMT = NumberFormat.getCurrencyInstance(Locale.US);
+  
   public static <T> void printLattice(Binominal<T> lattice, Format fmt, int periods) {
     System.out.println("===================================================================");
     System.out.println(lattice);
@@ -30,5 +36,12 @@ public class Util {
   public static void print(LatticeConfiguration config) {
     System.out.println("===================================================================");
     System.out.println(config);
+  }
+  
+  public static void printPrice(String msg, Security sec) {
+    printPrice(msg, sec.getPrice());
+  }
+  public static void printPrice(String msg, Double price) {
+    System.out.println(msg + " : " + MONEY_FMT.format(price));
   }
 }
