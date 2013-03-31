@@ -9,7 +9,10 @@ import de.mbuse.finance.binominal.lattice.TermStructureLatticeConfiguration;
 import de.mbuse.finance.binominal.lattice.Util;
 import de.mbuse.finance.binominal.rate.Rate;
 import de.mbuse.finance.binominal.rate.ShortRate;
+import de.mbuse.finance.binominal.security.Caplet;
+import de.mbuse.finance.binominal.security.Floorlet;
 import de.mbuse.finance.binominal.security.Option;
+import de.mbuse.finance.binominal.security.Swap;
 import de.mbuse.finance.binominal.security.ZeroCouponBond;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -49,6 +52,18 @@ public class TermStructureApp {
     Option euroZeroOption = new Option(zcb, 84.0, 2, Option.Type.CALL, Option.Region.EUROPEAN);
     Util.printLattice(euroZeroOption, MONEY_FMT, 5);
     System.out.println("Price: " + euroZeroOption.getPrice());
+    
+    Caplet caplet = new Caplet(lattice, 0.02, 6);
+    Util.printLattice(caplet, PERCENT_FMT, 6);
+    System.out.println("Price: " + caplet.getPrice());
+    
+    Floorlet floorlet = new Floorlet(lattice, 0.10, 6);
+    Util.printLattice(floorlet, PERCENT_FMT, 6);
+    System.out.println("Price: " + floorlet.getPrice());
+    
+    Swap swap = new Swap(lattice, .05, 6);
+    Util.printLattice(swap, PERCENT_FMT, 6);
+    System.out.println("Price: " + swap.getPrice());
   }
   
 }

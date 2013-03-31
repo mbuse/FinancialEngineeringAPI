@@ -35,10 +35,13 @@ public class FutureApp {
     
     Stock security = new Stock(100.0, lattice);
     
-    Option option = new Option(security, 100.0, 10, Option.Type.CALL, Option.Region.EUROPEAN);
+    Future future = new Future(security, 10, lattice);
+    
+    Option option = new Option(future, 100.0, 10, Option.Type.CALL, Option.Region.EUROPEAN);
     
     Util.print(lattice);
     Util.printLattice(security, NumberFormat.getCurrencyInstance(), periods);
+    Util.printLattice(future, NumberFormat.getCurrencyInstance(), periods);
     Util.printLattice(option, NumberFormat.getCurrencyInstance(), periods);
     
     
