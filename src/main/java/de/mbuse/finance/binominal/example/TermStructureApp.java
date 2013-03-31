@@ -16,6 +16,7 @@ import de.mbuse.finance.binominal.security.Swap;
 import de.mbuse.finance.binominal.security.ZeroCouponBond;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 /**
  *
@@ -64,6 +65,10 @@ public class TermStructureApp {
     Swap swap = new Swap(lattice, .05, 6);
     Util.printLattice(swap, PERCENT_FMT, 6);
     System.out.println("Price: " + swap.getPrice());
+    
+    Option swaption = new Option(swap, 0.0, 3, Option.Type.CALL, Option.Region.EUROPEAN);
+    Util.printLattice(swaption, PERCENT_FMT, 4);
+    System.out.println("Price: " + swaption.getPrice());
   }
   
 }
