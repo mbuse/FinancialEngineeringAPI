@@ -30,20 +30,20 @@ The following features are implemented by this API.
 
 ## Binominal Lattice Configurations
 
- * [src/main/java/de/mbuse/finance/binominal/lattice/BinominalLatticeConfiguration.java](Binominal Lattice Configuration): A configuration which implements risk neutral propability based on the up and down factors and the fixed discount rate.
- * [src/main/java/de/mbuse/finance/binominal/lattice/BlackScholesLatticeConfiguration.java](Black-Scholes Lattice Configuration): A lattice based on volatility using the Black-Scholes model.
- * [src/main/java/de/mbuse/finance/binominal/lattice/TermStructureLatticeConfiguration.java](Term Structure Lattice Configuration): Implements variable discount rates.
+ * [Binominal Lattice Configuration](src/main/java/de/mbuse/finance/binominal/lattice/BinominalLatticeConfiguration.java): A configuration which implements risk neutral propability based on the up and down factors and the fixed discount rate.
+ * [Black-Scholes Lattice Configuration](src/main/java/de/mbuse/finance/binominal/lattice/BlackScholesLatticeConfiguration.java): A lattice based on volatility using the Black-Scholes model.
+ * [Term Structure Lattice Configuration](src/main/java/de/mbuse/finance/binominal/lattice/TermStructureLatticeConfiguration.java): Implements variable discount rates.
 
 ## Securities
- * [src/main/java/de/mbuse/finance/binominal/security/Stock.java](Stocks)
- * [src/main/java/de/mbuse/finance/binominal/security/ZeroCouponBond.java](Zero Coupon Bonds)
- * [src/main/java/de/mbuse/finance/binominal/security/CouponPayingBond.java](Coupon Paying Bonds)
- * [src/main/java/de/mbuse/finance/binominal/security/Option.java](Options): American and European Call and Put Options on arbitrary securities
- * [src/main/java/de/mbuse/finance/binominal/security/ChooserOption.java](Chooser Option): A combination of a Call and a Put option
- * [src/main/java/de/mbuse/finance/binominal/security/Swap.java](Swaps)
- * [src/main/java/de/mbuse/finance/binominal/security/ForwardSwap.java](Forward Swaps): Swaps which start in the future.
- * [src/main/java/de/mbuse/finance/binominal/security/Future.java](Futures)
- * [src/main/java/de/mbuse/finance/binominal/security/Caplet.java](Caplets)
- * [src/main/java/de/mbuse/finance/binominal/security/Floorlet.java](Floorlets)
- * [src/main/java/de/mbuse/finance/binominal/security/ElementarySecurity.java](Elementary Security): Not a real security, but a nice tool to calculate prices based on future cash flows.
+ * [Stocks](src/main/java/de/mbuse/finance/binominal/security/Stock.java)
+ * [Zero Coupon Bonds](src/main/java/de/mbuse/finance/binominal/security/ZeroCouponBond.java)
+ * [Coupon Paying Bonds](src/main/java/de/mbuse/finance/binominal/security/CouponPayingBond.java)
+ * [Options](src/main/java/de/mbuse/finance/binominal/security/Option.java): American and European Call and Put Options on arbitrary securities
+ * [Chooser Optiona](src/main/java/de/mbuse/finance/binominal/security/ChooserOption.java): A combination of a Call and a Put option
+ * [Swaps](src/main/java/de/mbuse/finance/binominal/security/Swap.java)
+ * [Forward Swaps](src/main/java/de/mbuse/finance/binominal/security/ForwardSwap.java): Swaps which start in the future.
+ * [Futures](src/main/java/de/mbuse/finance/binominal/security/Future.java)
+ * [Caplets](src/main/java/de/mbuse/finance/binominal/security/Caplet.java)
+ * [Floorlets](src/main/java/de/mbuse/finance/binominal/security/Floorlet.java)
+ * [Elementary Security](src/main/java/de/mbuse/finance/binominal/security/ElementarySecurity.java): Not a real security, but a nice tool to calculate prices based on future cash flows.
 
