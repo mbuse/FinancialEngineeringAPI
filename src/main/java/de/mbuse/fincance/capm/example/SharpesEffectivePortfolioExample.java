@@ -5,8 +5,6 @@
 package de.mbuse.fincance.capm.example;
 
 import de.mbuse.fincance.capm.Portfolio;
-import org.apache.commons.math3.linear.Array2DRowRealMatrix;
-import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
@@ -21,33 +19,30 @@ public class SharpesEffectivePortfolioExample {
     
     Portfolio portfolio = new Portfolio(3);
     
+    portfolio.setPositions( 1, 1, 1);
+    
     portfolio.setMeanReturns(0.060, 0.02, 0.04);
     
     portfolio.setCovariancesForPosition(0,  0.00800, -0.00200,   0.00400);
     portfolio.setCovariancesForPosition(1, -0.00200,  0.00200,  -0.00200);
     portfolio.setCovariancesForPosition(2,  0.00400, -0.00200,   0.00800);
     
+    portfolio.setRiskFreeRate(0.01);
     
-    System.out.println("Mean Returns : " + portfolio.getMeanReturns());
-    System.out.println("Covariances  : " + portfolio.getCovariances());
-    System.out.println("Volatilities : " + portfolio.getVolatilities());
     
-    final double interestRate = 0.01;
+    System.out.println("Mean Returns   : " + portfolio.getMeanReturns());
+    System.out.println("Covariances    : " + portfolio.getCovariances());
+    System.out.println("Volatilities   : " + portfolio.getVolatilities());
+    System.out.println("Risk free rate : " + portfolio.getRiskFreeRate());
+    System.out.println("Excess Returns : " + portfolio.getExcessReturns());
     
-    RealVector excessReturn = portfolio.getMeanReturns().mapSubtract(interestRate);
+    System.out.println("Portfolio mean return : " + portfolio.getPortfolioMeanReturn());
+    System.out.println("Portfolio volatility  : " + portfolio.getPortfolioVolatility());
     
-    System.out.println("Excess Return  : " + excessReturn);
+    Portfolio sharpeOptimizedPortfolio = portfolio.calculateSharpeOptimalPortfolio();
     
-    RealMatrix inverseCovariances = new EigenDecomposition(portfolio.getCovariances(), 0.0001).getSolver().getInverse();
-    RealVector sharpePositions = inverseCovariances.operate(excessReturn);
-    
-    double sumOfSharpePositions = sharpePositions.getL1Norm();  
-    
-    System.out.println("Sharpe positions : " + sharpePositions );
-    System.out.println("Sum              : " + sumOfSharpePositions);
-    
-    RealVector sharpePortfolio = sharpePositions.mapDivide(sumOfSharpePositions);
-    
-    System.out.println("Sharpe portfolio : " + sharpePortfolio);
+    System.out.println("Sharpe portfolio : " + sharpeOptimizedPortfolio.getPositions());
+    System.out.println("Sharpe mean return : " + sharpeOptimizedPortfolio.getPortfolioMeanReturn());
+    System.out.println("Sharpe portfolio volatility : " + sharpeOptimizedPortfolio.getPortfolioVolatility());
   }
 }
