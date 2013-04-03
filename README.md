@@ -47,3 +47,5 @@ The following features are implemented by this API.
  * [Floorlets](src/main/java/de/mbuse/finance/binominal/security/Floorlet.java)
  * [Elementary Security](src/main/java/de/mbuse/finance/binominal/security/ElementarySecurity.java): Not a real security, but a nice tool to calculate prices based on future cash flows.
 
+## Portfolio Management
+ * [Sharpe Optimized Portfolio](src/main/java/de/mbuse/finance/portfolio/example/SharpeEffectivePortfolioExample.java)
