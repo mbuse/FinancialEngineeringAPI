@@ -13,7 +13,6 @@ import de.mbuse.finance.binominal.security.Stock;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Locale;
-import sun.java2d.SunGraphicsEnvironment;
 
 /**
  *
