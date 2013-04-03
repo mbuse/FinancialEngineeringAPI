@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.mbuse.fincance.capm.example;
+package de.mbuse.fincance.portfolio.example;
 
-import de.mbuse.fincance.capm.Portfolio;
+import de.mbuse.fincance.portfolio.Portfolio;
 import org.apache.commons.math3.linear.EigenDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
