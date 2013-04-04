@@ -61,6 +61,37 @@ public class ElementarySecurity implements Security {
     return price;
   }
 
+  /** 
+   * The price of a Zero-Coupon-Bond that matures at time t.
+   * The face-value of this bond is set to 1.
+   * 
+   * This price is given by:
+   * 
+   *  P(t) = SUM_u=0..t ( getValue(t, u) )
+   **/
+  public Double getZCBPrice(int t) {
+    assert t >= 0;
+    double price = 0.0;
+    for (int i=0; i<=t; i++) {
+      price += getValue(t, i);
+    }
+    return price;
+  }
+  
+  /**
+   * An array of Zero-Coupon-Bond prices, starting with t=0 and ending with t=maxT
+   * @return 
+   */
+  public double[] getZCBPrices(int maxT) {
+    double[] prices = new double[maxT + 1];
+    for (int t=0; t<=maxT; t++) {
+      prices[t] = getZCBPrice(t);
+    }
+    return prices;
+  }
+  
+  
+  
   @Override
   public String toString() {
     return "Elementary Security (lattice: " + lattice + ")";
