@@ -4,19 +4,18 @@
  */
 package de.mbuse.finance.binominal.rate;
 
-import de.mbuse.finance.binominal.Binominal;
 import de.mbuse.finance.binominal.LatticeConfiguration;
 
 /**
  *
  * @author mbuse
  */
-public class ShortRate extends AbstractRate {
+public class SimpleVariableRate extends AbstractRate {
 
   private LatticeConfiguration lattice;
   private Double rateAtTimeZero;
   
-  public ShortRate(Double rateAtTimeZero, LatticeConfiguration lattice) {
+  public SimpleVariableRate(Double rateAtTimeZero, LatticeConfiguration lattice) {
     this.rateAtTimeZero = rateAtTimeZero;
     this.lattice = lattice;
   }
@@ -40,7 +39,7 @@ public class ShortRate extends AbstractRate {
 
   @Override
   public String toString() {
-    return "ShortRate (r0=" + rateAtTimeZero + ")";
+    return "SimpleVariableRate (r0=" + rateAtTimeZero + ")";
   }
   
   

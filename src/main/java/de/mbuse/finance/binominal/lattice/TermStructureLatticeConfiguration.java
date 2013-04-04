@@ -6,7 +6,7 @@ package de.mbuse.finance.binominal.lattice;
 
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.rate.Rate;
-import de.mbuse.finance.binominal.rate.ShortRate;
+import de.mbuse.finance.binominal.rate.SimpleVariableRate;
 
 /**
  *
@@ -28,7 +28,7 @@ public class TermStructureLatticeConfiguration extends LatticeConfiguration {
 
   @Override
   public Rate getRate() {
-    return new ShortRate(rateAtTimeZero, this);
+    return new SimpleVariableRate(rateAtTimeZero, this);
   }
   
   public Double getRateAtTimeZero() {

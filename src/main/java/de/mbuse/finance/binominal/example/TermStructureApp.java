@@ -8,7 +8,7 @@ import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.lattice.TermStructureLatticeConfiguration;
 import de.mbuse.finance.binominal.lattice.Util;
 import de.mbuse.finance.binominal.rate.Rate;
-import de.mbuse.finance.binominal.rate.ShortRate;
+import de.mbuse.finance.binominal.rate.SimpleVariableRate;
 import de.mbuse.finance.binominal.security.Caplet;
 import de.mbuse.finance.binominal.security.Floorlet;
 import de.mbuse.finance.binominal.security.Option;

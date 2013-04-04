@@ -7,7 +7,7 @@ package de.mbuse.finance.binominal.security;
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.Security;
 import de.mbuse.finance.binominal.rate.Rate;
-import de.mbuse.finance.binominal.rate.ShortRate;
+import de.mbuse.finance.binominal.rate.SimpleVariableRate;
 import java.text.NumberFormat;
 
 /**
