@@ -33,6 +33,7 @@ The following features are implemented by this API.
  * [Binominal Lattice Configuration](src/main/java/de/mbuse/finance/binominal/lattice/BinominalLatticeConfiguration.java): A configuration which implements risk neutral propability based on the up and down factors and the fixed discount rate.
  * [Black-Scholes Lattice Configuration](src/main/java/de/mbuse/finance/binominal/lattice/BlackScholesLatticeConfiguration.java): A lattice based on volatility using the Black-Scholes model.
  * [Term Structure Lattice Configuration](src/main/java/de/mbuse/finance/binominal/lattice/TermStructureLatticeConfiguration.java): Implements variable discount rates.
+ * [Black-Derman-Toy Lattice Configuration](src/main/java/de/mbuse/finance/binominal/lattice/BlackDermanToyLatticeConfiguration.java) : A model, used for calibration of the binominal lattice.
 
 ## Securities
  * [Stocks](src/main/java/de/mbuse/finance/binominal/security/Stock.java)
