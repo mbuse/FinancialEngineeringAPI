@@ -41,7 +41,26 @@ public class Util {
   public static void printPrice(String msg, Security sec) {
     printPrice(msg, sec.getPrice());
   }
-  public static void printPrice(String msg, Double price) {
-    System.out.println(msg + " : " + MONEY_FMT.format(price));
+  public static void printPrice(String msg, Format fmt, Security sec) {
+    printValue(msg, fmt, sec.getPrice());
   }
+  
+  public static void printPrice(String msg, Double price) {
+    printValue(msg, MONEY_FMT, price);
+  }
+  public static void printValue(String msg, Format fmt, Double price) {
+    System.out.println(msg + " : " + fmt.format(price));
+  }
+  
+  public static void printPrices(String msg, double... prices) {
+    printValues(msg, MONEY_FMT, prices);
+  }
+  
+  public static void printValues(String msg, Format fmt, double... prices) {
+    System.out.print(msg + " : ");
+    for (double p : prices) {
+      System.out.print(fmt.format(p) + "\t");
+    }
+    System.out.println();
+  } 
 }
