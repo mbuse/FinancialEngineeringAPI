@@ -31,7 +31,7 @@ The following features are implemented by this API.
  * [Elementary Security](src/main/java/de/mbuse/finance/binominal/security/ElementarySecurity.java): Not a real security, but a nice tool to calculate prices based on future cash flows.
 
 ## Portfolio Management
- * [Sharpe Optimized Portfolio](src/main/java/de/mbuse/finance/portfolio/example/SharpeEffectivePortfolioExample.java)
+ * [Sharpe Optimized Portfolio](src/main/java/de/mbuse/finance/portfolio/example/SharpesEffectivePortfolioExample.java)
 
 
 # Disclaimer
