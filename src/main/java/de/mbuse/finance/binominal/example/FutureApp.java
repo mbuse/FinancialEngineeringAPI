@@ -4,7 +4,7 @@
  */
 package de.mbuse.finance.binominal.example;
 
-import de.mbuse.finance.binominal.lattice.Util;
+import de.mbuse.finance.util.Out;
 import de.mbuse.finance.binominal.lattice.BlackScholesLatticeConfiguration;
 import de.mbuse.finance.binominal.security.Future;
 import de.mbuse.finance.binominal.LatticeConfiguration;
@@ -38,10 +38,10 @@ public class FutureApp {
     
     Option option = new Option(future, 100.0, 10, Option.Type.CALL, Option.Region.EUROPEAN);
     
-    Util.print(lattice);
-    Util.printLattice(security, NumberFormat.getCurrencyInstance(), periods);
-    Util.printLattice(future, NumberFormat.getCurrencyInstance(), periods);
-    Util.printLattice(option, NumberFormat.getCurrencyInstance(), periods);
+    Out.print(lattice);
+    Out.printLattice(security, NumberFormat.getCurrencyInstance(), periods);
+    Out.printLattice(future, NumberFormat.getCurrencyInstance(), periods);
+    Out.printLattice(option, NumberFormat.getCurrencyInstance(), periods);
     
     
     

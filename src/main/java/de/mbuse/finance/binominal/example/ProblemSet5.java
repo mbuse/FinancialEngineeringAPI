@@ -8,7 +8,7 @@ import de.mbuse.finance.binominal.Binominal;
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.Security;
 import de.mbuse.finance.binominal.lattice.TermStructureLatticeConfiguration;
-import de.mbuse.finance.binominal.lattice.Util;
+import de.mbuse.finance.util.Out;
 import de.mbuse.finance.binominal.rate.Rate;
 import de.mbuse.finance.binominal.security.CouponPayingBond;
 import de.mbuse.finance.binominal.security.ElementarySecurity;
@@ -44,8 +44,8 @@ public class ProblemSet5 {
     final LatticeConfiguration lattice = new TermStructureLatticeConfiguration(UP, DOWN, Q, RATE_0);
     final Rate shortRates = lattice.getRate();
     
-    Util.print(lattice);
-    Util.printLattice(shortRates, PERCENT_FMT, MATURITY);
+    Out.print(lattice);
+    Out.printLattice(shortRates, PERCENT_FMT, MATURITY);
     
     // Q1 : Zero Coupon Bond price
     CouponPayingBond zcb = new CouponPayingBond(lattice, 100.0, 0.0, MATURITY);
@@ -90,18 +90,18 @@ public class ProblemSet5 {
     };
     
     ElementarySecurity esec = new ElementarySecurity(lattice);
-    Util.printLattice(esec, NUMBER_FMT, MATURITY);
-    Util.printLattice(forwardSwapPmts, PERCENT_FMT, MATURITY);
-    Util.printPrice("Q5", nominal * esec.calculatePrice(forwardSwapPmts, MATURITY));
+    Out.printLattice(esec, NUMBER_FMT, MATURITY);
+    Out.printLattice(forwardSwapPmts, PERCENT_FMT, MATURITY);
+    Out.printPrice("Q5", nominal * esec.calculatePrice(forwardSwapPmts, MATURITY));
     
     ForwardSwap fwdswp = new ForwardSwap(lattice, fixedRate, start, maturity);
-    Util.printLattice(fwdswp, NUMBER_FMT, maturity);
-    Util.printPrice("Q5 (alternativ)", nominal * fwdswp.getPrice());
+    Out.printLattice(fwdswp, NUMBER_FMT, maturity);
+    Out.printPrice("Q5 (alternativ)", nominal * fwdswp.getPrice());
     
     // Q6: Compute the initial price of a swaption that matures at time t=5 and has a strike of 0.
     
     Option swaption = new Option(fwdswp, 0.0, 5, Option.Type.CALL, Option.Region.EUROPEAN);
-    Util.printPrice("Q6", nominal * swaption.getPrice());
+    Out.printPrice("Q6", nominal * swaption.getPrice());
   }
   
   private static void outPrice(String msg, Security sec) {

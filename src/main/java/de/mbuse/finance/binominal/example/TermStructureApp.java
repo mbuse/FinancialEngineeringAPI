@@ -6,7 +6,7 @@ package de.mbuse.finance.binominal.example;
 
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.lattice.TermStructureLatticeConfiguration;
-import de.mbuse.finance.binominal.lattice.Util;
+import de.mbuse.finance.util.Out;
 import de.mbuse.finance.binominal.rate.Rate;
 import de.mbuse.finance.binominal.rate.SimpleVariableRate;
 import de.mbuse.finance.binominal.security.Caplet;
@@ -40,35 +40,35 @@ public class TermStructureApp {
     LatticeConfiguration lattice = new TermStructureLatticeConfiguration(UP, DOWN, Q, RATE_0);
     Rate shortRates = lattice.getRate();
     
-    Util.print(lattice);
-    Util.printLattice(shortRates, PERCENT_FMT, 5);
+    Out.print(lattice);
+    Out.printLattice(shortRates, PERCENT_FMT, 5);
     
     ZeroCouponBond zcb = new ZeroCouponBond(lattice, 100.0, 4);
-    Util.printLattice(zcb, MONEY_FMT, 5);
+    Out.printLattice(zcb, MONEY_FMT, 5);
     
     Option americanZeroOption = new Option(zcb, 88.0, 3, Option.Type.PUT, Option.Region.AMERICAN);
-    Util.printLattice(americanZeroOption, MONEY_FMT, 5);
-    Util.printPrice("Price", americanZeroOption);
+    Out.printLattice(americanZeroOption, MONEY_FMT, 5);
+    Out.printPrice("Price", americanZeroOption);
     
     Option euroZeroOption = new Option(zcb, 84.0, 2, Option.Type.CALL, Option.Region.EUROPEAN);
-    Util.printLattice(euroZeroOption, MONEY_FMT, 5);
-    Util.printPrice("Price", euroZeroOption);
+    Out.printLattice(euroZeroOption, MONEY_FMT, 5);
+    Out.printPrice("Price", euroZeroOption);
     
     Caplet caplet = new Caplet(lattice, 0.02, 6);
-    Util.printLattice(caplet, PERCENT_FMT, 6);
-    Util.printPrice("Price",caplet.getPrice());
+    Out.printLattice(caplet, PERCENT_FMT, 6);
+    Out.printPrice("Price",caplet.getPrice());
     
     Floorlet floorlet = new Floorlet(lattice, 0.10, 6);
-    Util.printLattice(floorlet, PERCENT_FMT, 6);
-    Util.printPrice("Price", floorlet.getPrice());
+    Out.printLattice(floorlet, PERCENT_FMT, 6);
+    Out.printPrice("Price", floorlet.getPrice());
     
     Swap swap = new Swap(lattice, .05, 6);
-    Util.printLattice(swap, PERCENT_FMT, 6);
-    Util.printPrice("Price:", swap.getPrice());
+    Out.printLattice(swap, PERCENT_FMT, 6);
+    Out.printPrice("Price:", swap.getPrice());
     
     Option swaption = new Option(swap, 0.0, 3, Option.Type.CALL, Option.Region.EUROPEAN);
-    Util.printLattice(swaption, PERCENT_FMT, 4);
-    Util.printPrice("Price: ", swaption.getPrice());
+    Out.printLattice(swaption, PERCENT_FMT, 4);
+    Out.printPrice("Price: ", swaption.getPrice());
   }
   
 }

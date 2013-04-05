@@ -13,7 +13,7 @@ import de.mbuse.finance.binominal.security.Stock;
 
 import de.mbuse.finance.binominal.security.Option.Region;
 import de.mbuse.finance.binominal.security.Option.Type;
-import de.mbuse.finance.binominal.lattice.Util;
+import de.mbuse.finance.util.Out;
 import java.text.NumberFormat;
 import java.util.Locale;
 /**
@@ -57,7 +57,7 @@ public class ProblemSet2 {
   public static void question3() {
     Stock stock = new Stock(S_0, config);
     Option opt = new Option(stock, 110.00, 15, Type.PUT, Region.AMERICAN);
-    Util.printLattice(opt.getShouldExecutes(), null, 15);
+    Out.printLattice(opt.getShouldExecutes(), null, 15);
     
     System.out.println("Q3 - Earliest possible execution at t=" + opt.getEarliestExecutionPeriod());
   }
@@ -67,9 +67,9 @@ public class ProblemSet2 {
     Future future = new Future(stock, 15, config);
     Option opt = new Option(future, 110.00, 10, Type.CALL, Region.AMERICAN);
     
-    Util.printLattice(stock, CUR_FMT, 15);
-    Util.printLattice(future, CUR_FMT, 15);
-    Util.printLattice(opt, CUR_FMT, 15);
+    Out.printLattice(stock, CUR_FMT, 15);
+    Out.printLattice(future, CUR_FMT, 15);
+    Out.printLattice(opt, CUR_FMT, 15);
     System.out.println("Q6 - Fair value : " + opt.getPrice());
   }
   
@@ -78,7 +78,7 @@ public class ProblemSet2 {
     Future future = new Future(stock, 15, config);
     Option opt = new Option(future, 110.00, 10, Type.CALL, Region.AMERICAN);
     
-    Util.printLattice(opt.getShouldExecutes(), null, 15);
+    Out.printLattice(opt.getShouldExecutes(), null, 15);
     
     System.out.println("Q7 - Earliest possible execution at t=" + opt.getEarliestExecutionPeriod());
   }
@@ -90,10 +90,10 @@ public class ProblemSet2 {
     
     ChooserOption chooser = new ChooserOption(call, put, 10, config);
     
-    Util.printLattice(call, CUR_FMT, 15);
-    Util.printLattice(put, CUR_FMT, 15);
-    Util.printLattice(chooser, CUR_FMT, 11);
-    Util.printLattice(chooser.getPreferedOptions(), null, 11);
+    Out.printLattice(call, CUR_FMT, 15);
+    Out.printLattice(put, CUR_FMT, 15);
+    Out.printLattice(chooser, CUR_FMT, 11);
+    Out.printLattice(chooser.getPreferedOptions(), null, 11);
     
     System.out.println("Q8 - fair value of chooser : " + CUR_FMT.format(chooser.getPrice()));
     

@@ -1,6 +1,6 @@
 package de.mbuse.finance.binominal.example;
 
-import de.mbuse.finance.binominal.lattice.Util;
+import de.mbuse.finance.util.Out;
 import de.mbuse.finance.binominal.lattice.BlackScholesLatticeConfiguration;
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.security.Option;
@@ -35,7 +35,7 @@ public class App
         System.out.println("---");
         
         Stock security = new Stock(100.0, lattice);
-        Util.printLattice(security, moneyFormat, n);
+        Out.printLattice(security, moneyFormat, n);
         
         System.out.println("---");
         
@@ -45,10 +45,10 @@ public class App
         Option americanPut = new Option(security, 110.0, 15, Option.Type.PUT, Option.Region.AMERICAN);
         System.out.println("Price American Put Option  : " + moneyFormat.format(americanPut.getPrice()));
         
-        Util.printLattice(americanPut, moneyFormat, n);
+        Out.printLattice(americanPut, moneyFormat, n);
         
-        Util.printLattice(americanPut.getPayOffs(), moneyFormat, n);
+        Out.printLattice(americanPut.getPayOffs(), moneyFormat, n);
         
-        Util.printLattice(americanPut.getShouldExecutes(), null, n);
+        Out.printLattice(americanPut.getShouldExecutes(), null, n);
     }
 }

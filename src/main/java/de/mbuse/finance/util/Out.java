@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.mbuse.finance.binominal.lattice;
+package de.mbuse.finance.util;
 
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.Binominal;
@@ -15,8 +15,9 @@ import java.util.Locale;
  *
  * @author mbuse
  */
-public class Util {
+public class Out {
   
+  public static final NumberFormat DECIMAL_FMT = NumberFormat.getInstance(Locale.US);
   public static final NumberFormat MONEY_FMT = NumberFormat.getCurrencyInstance(Locale.US);
   
   public static <T> void printLattice(Binominal<T> lattice, Format fmt, int periods) {
@@ -48,18 +49,27 @@ public class Util {
   public static void printPrice(String msg, Double price) {
     printValue(msg, MONEY_FMT, price);
   }
-  public static void printValue(String msg, Format fmt, Double price) {
-    System.out.println(msg + " : " + fmt.format(price));
+  public static void printValue(String msg, Format fmt, Double value) {
+    System.out.println(msg + " : " + fmt.format(value));
   }
   
   public static void printPrices(String msg, double... prices) {
-    printValues(msg, MONEY_FMT, prices);
+    print(msg, MONEY_FMT, prices);
   }
   
-  public static void printValues(String msg, Format fmt, double... prices) {
+  public static void print(String msg, double... values) {
+    print(msg, DECIMAL_FMT, values);
+  }
+  
+  public static void print(String msg, Format fmt, double... values) {
     System.out.print(msg + " : ");
-    for (double p : prices) {
-      System.out.print(fmt.format(p) + "\t");
+    for (int i=0; i<values.length; i++) {
+      if (i==values.length-1) {
+        System.out.print(fmt.format(values[i]));
+      }
+      else {
+        System.out.print(fmt.format(values[i]) + "\t");
+      }
     }
     System.out.println();
   } 

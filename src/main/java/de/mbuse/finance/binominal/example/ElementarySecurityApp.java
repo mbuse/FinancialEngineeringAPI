@@ -7,7 +7,7 @@ package de.mbuse.finance.binominal.example;
 import de.mbuse.finance.binominal.Binominal;
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.lattice.TermStructureLatticeConfiguration;
-import de.mbuse.finance.binominal.lattice.Util;
+import de.mbuse.finance.util.Out;
 import de.mbuse.finance.binominal.security.CouponPayingBond;
 import de.mbuse.finance.binominal.security.ElementarySecurity;
 import de.mbuse.finance.binominal.security.Swap;
@@ -41,7 +41,7 @@ public class ElementarySecurityApp {
     
     ElementarySecurity esec = new ElementarySecurity(lattice);
     
-    Util.printLattice(esec, PERCENT_FMT, 10);
+    Out.printLattice(esec, PERCENT_FMT, 10);
     
     // calculate Zero Coupon Bond (mat=4) price based on Elementary Security:
     
@@ -79,7 +79,7 @@ public class ElementarySecurityApp {
       }
     };
     
-    Util.printLattice(cpbPayoffs, MONEY_FMT, MATURITY+1);
+    Out.printLattice(cpbPayoffs, MONEY_FMT, MATURITY+1);
     
     System.out.println("Coupon Bond Price (Elementary Security Pricing)    : " + MONEY_FMT.format(esec.calculatePrice(cpbPayoffs, MATURITY)));
     System.out.println("Coupon Bond Price (Coupon Paying Bond calculation) : " + MONEY_FMT.format(cpb.getPrice()));  
@@ -88,8 +88,8 @@ public class ElementarySecurityApp {
     final double nominal = 1000000.;
     
     Swap swap = new Swap(lattice, fixed, 3);
-    Util.printLattice(swap, PERCENT_FMT, 3);
-    Util.printPrice("Swap Price", swap.getPrice() * nominal);
+    Out.printLattice(swap, PERCENT_FMT, 3);
+    Out.printPrice("Swap Price", swap.getPrice() * nominal);
     
     Binominal<Double> forwardSwap = new Binominal<Double>() {
       public Double getValue(int t, int u) {
@@ -102,7 +102,7 @@ public class ElementarySecurityApp {
         }
       }
     };
-    Util.printLattice(forwardSwap, PERCENT_FMT, 5);
-    Util.printPrice("Forward Swap Price", nominal * esec.calculatePrice(forwardSwap, 3));
+    Out.printLattice(forwardSwap, PERCENT_FMT, 5);
+    Out.printPrice("Forward Swap Price", nominal * esec.calculatePrice(forwardSwap, 3));
   }
 }
