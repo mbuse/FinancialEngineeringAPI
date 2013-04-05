@@ -33,6 +33,8 @@ The following features are implemented by this API.
 ## Portfolio Management
  * [Sharpe Optimized Portfolio](src/main/java/de/mbuse/finance/portfolio/example/SharpesEffectivePortfolioExample.java)
 
+## Optimization
+ * [Non-Linear Powell Optimizer](src/main/java/de/mbuse/finance/optimization/Optimizer.java) A Non-Linear Optimizer based on the Powell Algorithm of Apache Commons Math3
 
 # Disclaimer
 

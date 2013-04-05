@@ -7,16 +7,14 @@ package de.mbuse.finance.binominal.example;
 import de.mbuse.finance.binominal.Compounding;
 import de.mbuse.finance.binominal.LatticeConfiguration;
 import de.mbuse.finance.binominal.lattice.BlackDermanToyLatticeConfiguration;
-import de.mbuse.finance.util.Out;
 import de.mbuse.finance.binominal.security.ElementarySecurity;
+import de.mbuse.finance.optimization.Optimizer;
 import de.mbuse.finance.util.ArrayUtil;
+import de.mbuse.finance.util.Out;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Locale;
 import org.apache.commons.math3.analysis.MultivariateFunction;
-import org.apache.commons.math3.optimization.GoalType;
-import org.apache.commons.math3.optimization.PointValuePair;
-import org.apache.commons.math3.optimization.direct.PowellOptimizer;
 
 /**
  *
@@ -84,35 +82,15 @@ public class BlackDermanToyApp {
         return ArrayUtil.squaredDistance(MARKET_SPOT_RATES, spotRates);
       }
     };
+ 
+    Optimizer solver = new Optimizer();
+    solver.setObjectiveFunction(objectiveFunction);
+    solver.setInitialParameters(initialA);
+    solver.setMaxAbsoluteDifference(0.00001);
+    solver.minimize();
+    double[] optimizedParams = solver.getOptimizedParameters();
     
-    
-    //SimplexOptimizer solver = new SimplexOptimizer(new SimpleValueChecker(-1, 0.00000001));
-    //solver.setSimplex(new NelderMeadSimplex(initialA.length));
-    
-    PowellOptimizer solver = new PowellOptimizer(0.1, 0.1);
-    
-    double[] guess = initialA.clone();
-    
-    for (int runs=1; runs<100; runs++) {
-      PointValuePair result = solver.optimize(5000, objectiveFunction, GoalType.MINIMIZE, guess);
-      Out.print("Optimized a : ", PERCENT_FMT, guess);
-      System.out.println("Distance    : " + result.getValue() );
-      
-      if (0.00001 > ArrayUtil.maximumAbsoluteDifference(result.getPointRef(), guess)) {
-        break;
-      }
-      
-      solver = new PowellOptimizer(0.1, result.getValue() / 10);
-      guess = result.getPoint();
-    }
-    
-    Out.print("Optimized a[t] : ", PERCENT_FMT, guess);
+    Out.print("Optimized a[t] : ", PERCENT_FMT, optimizedParams);
   }
-  
-  
-  
-  
-  
-  
   
 }
