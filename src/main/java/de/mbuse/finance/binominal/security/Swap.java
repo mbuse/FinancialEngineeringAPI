@@ -15,13 +15,19 @@ import de.mbuse.finance.binominal.Security;
 public class Swap implements Security {
 
   private LatticeConfiguration lattice;
-  private Double strike;
+  private Double fixedRate;
   private int maturity;
+  private Type type = Type.PAYER;
 
   public Swap(LatticeConfiguration lattice, Double strike, int maturity) {
+    this(lattice, strike, maturity, Type.PAYER);
+  }
+  
+  public Swap(LatticeConfiguration lattice, Double strike, int maturity, Type type) {
     this.lattice = lattice;
-    this.strike = strike;
+    this.fixedRate = strike;
     this.maturity = maturity;
+    this.type = type;
   }
   
   
@@ -43,7 +49,7 @@ public class Swap implements Security {
     }
     else if (t==periodOfSettlement) {
       Double rate = lattice.getRate().getRate(periodOfSettlement, u);
-      return (rate - strike)/(1 + rate);
+      return rateDifference(rate)/(1 + rate);
     }
     else {
       Double rate = lattice.getRate().getRate(t, u);
@@ -51,9 +57,13 @@ public class Swap implements Security {
       Double qd = lattice.getRiskFreePropabilityForDown();
       Double su = getValue(t+1, u+1);
       Double sd = getValue(t+1, u);
-      Double coupon = rate - strike;
+      Double coupon = rateDifference(rate);
       return (coupon + qu * su + qd * sd) / (1.0 + rate);
     }
+  }
+  
+  private double rateDifference(double rate) {
+    return type.getFactor() * (rate - fixedRate);
   }
   
   /** returns the payments of the swap 
@@ -63,7 +73,7 @@ public class Swap implements Security {
    * 
    * Therefore the payment at time (t, u) is:
    * 
-   * P(t,u) = (rate(t,u) - strike)/(1 + rate(t,u)).
+   * P(t,u) = (rate(t,u) - fixedRate)/(1 + rate(t,u)).
    */
   public Binominal<Double> getPayments() {
     return new Binominal<Double>() {
@@ -73,7 +83,7 @@ public class Swap implements Security {
 
       public Double getValue(int t, int u) {
         Double rate = lattice.getRate().getRate(t, u);
-        return  (rate - strike)/(1.0 + rate);
+        return  (rate - fixedRate)/(1.0 + rate);
       }
     };
   }
@@ -81,9 +91,26 @@ public class Swap implements Security {
   @Override
   public String toString() {
     return "Swap (maturity: " + maturity
-            + ", strike: " + strike
+            + ", strike: " + fixedRate
             + ", lattice: " + lattice + ")";
   }
   
+  public static enum Type {
+    /** Payer Swap pays (rate - fixedRate) **/
+    PAYER(1),
+    /** Receiver Swap pays (fixed - rate) **/
+    RECEIVER(-1);
+
+    private Type(int f) {
+      factor = f;
+    }
+
+    public int getFactor() {
+      return factor;
+    }
+    
+    protected int factor;
+    
+  }
   
 }
