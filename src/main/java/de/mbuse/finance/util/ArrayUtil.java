@@ -1,5 +1,6 @@
 package de.mbuse.finance.util;
 
+import java.util.Arrays;
 import org.apache.commons.math3.util.FastMath;
 
 /**
@@ -7,6 +8,15 @@ import org.apache.commons.math3.util.FastMath;
  * @author mbuse
  */
 public class ArrayUtil {
+  
+  /**
+   * Create a new double[] with given length, filled with the given value.
+   */
+  public static double[] init(int length, double value) {
+    double[] array = new double[length];
+    Arrays.fill(array, value);
+    return array;
+  }
   
   /**
    * Substracts the vector b from a and scalar-multiplies the result with itself.
