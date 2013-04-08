@@ -71,4 +71,45 @@ public class Compounding {
     return spotRates;
   }
   
+  /**
+   * Calculates the net present value of a given cashflow, using a fixed rate
+   * 
+   * @param rate the fixed interest rate
+   * @param cashflow the cashflow starting at t=0. 
+   * @return the sum of all cashflows
+   */
+  public static double npv(double rate, double[] cashflow) {
+    double presentValue = 0.0;
+    for (int t=0; t<cashflow.length; t++) {
+      presentValue += pv(cashflow[t], rate, t);
+    }
+    return presentValue;
+  }
+  
+  /**
+   * calculates the present value of a given amount a given number of periods 
+   * ahead, discounted using a given fixed rate.
+   * 
+   * @param amount  the future value at the given period
+   * @param rate    the rate per period
+   * @param periods number of periods the future value is ahead
+   * @return 
+   */
+  public static double pv(double amount, double rate, int periods) {
+    return amount / Math.pow(1 + rate, periods);
+  }
+  
+  /**
+   * calculates the future value of a given amount a given number of periods 
+   * ahead, compounded by a given fixed rate.
+   * 
+   * @param amount  the present value
+   * @param rate    the rate per period
+   * @param periods the number of periods the future value is ahead
+   * @return 
+   */
+  public static double fv(double amount, double rate, int periods) {
+    return amount * Math.pow(1 + rate, periods);
+  }
+  
 }
