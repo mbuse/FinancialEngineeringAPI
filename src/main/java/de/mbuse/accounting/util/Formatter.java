@@ -80,6 +80,12 @@ public class Formatter {
     out.flush();
   }
   
+  public void print(List<Transaction> journal) {
+    for(Transaction tx : journal) {
+      print(tx);
+    }
+  }
+  
   public void print(Transaction tx) {
     String date = dateFormat.format(tx.getDate());
     out.println(date + "  " + tx.getDescription());
