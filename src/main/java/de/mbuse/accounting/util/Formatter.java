@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class Formatter {
       String empty = makeString(' ', amount.length());
       String d = entry.isDebit() ? amount : empty;
       String c = entry.isDebit() ? empty : amount;
-      out.println(d + " | " + c + "   " + dateFormat.format(tx.getDate()) + " " + tx.getDescription());
+      out.println(d + " | " + c + "   " + formatDate(tx.getDate()) + " " + tx.getDescription());
     }
     out.println(hline);
     
@@ -87,7 +88,7 @@ public class Formatter {
   }
   
   public void print(Transaction tx) {
-    String date = dateFormat.format(tx.getDate());
+    String date = formatDate(tx.getDate());
     out.println(date + "  " + tx.getDescription());
     
     tx.sort();
@@ -110,6 +111,10 @@ public class Formatter {
     }
     out.println();
     out.flush();
+  }
+  
+  private String formatDate(Date date) {
+    return (date==null) ? "n/a" : dateFormat.format(date);
   }
   
   private List<String> alignStrings(List<String> lines, int minLength, boolean rightAlign) {
