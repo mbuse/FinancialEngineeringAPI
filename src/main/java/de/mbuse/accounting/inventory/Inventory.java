@@ -2,7 +2,6 @@ package de.mbuse.accounting.inventory;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import org.apache.commons.math3.transform.FastCosineTransformer;
 
 /**
  *
