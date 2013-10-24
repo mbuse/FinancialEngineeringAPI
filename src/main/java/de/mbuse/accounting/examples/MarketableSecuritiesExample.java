@@ -2,7 +2,6 @@ package de.mbuse.accounting.examples;
 
 import de.mbuse.accounting.accounts.TAccount;
 import de.mbuse.accounting.investment.MarketableSecurity;
-import de.mbuse.accounting.journal.Transaction;
 import de.mbuse.accounting.util.Formatter;
 
 /**
