@@ -19,18 +19,23 @@ public class MarketableSecuritiesExample {
     
     MarketableSecurity ts = new MarketableSecurity("Trading Security", MarketableSecurity.Method.TRADING);
     MarketableSecurity afs = new MarketableSecurity("Avail-for-Sale", MarketableSecurity.Method.AVAILABLE_FOR_SALES);
+    MarketableSecurity htm = new MarketableSecurity("Hold-To-Maturity", MarketableSecurity.Method.HOLD_TO_MATURITY);
     
     ts.buy(null, 100, 25., cash);
     afs.buy(null, 100, 25., cash);
+    htm.buy(null, 100, 25., cash);
     
     ts.markToMarket(null, 23.);
     afs.markToMarket(null, 23.);
+    htm.markToMarket(null, 23.);
     
     ts.markToMarket(null, 27.);
     afs.markToMarket(null, 27.);
+    htm.markToMarket(null, 27.);
     
     ts.sell(null, 70, 26., cash);
     afs.sell(null, 70, 26., cash);
+    htm.sell(null, 70, 26., cash);
     
     FMT.print(ts.getJournal());
     FMT.print(ts.getAsset());
@@ -42,6 +47,11 @@ public class MarketableSecuritiesExample {
     FMT.print(afs.getAOCI());
     FMT.print(afs.getGains());
     FMT.print(afs.getLosses());
+    
+    FMT.print(htm.getJournal());
+    FMT.print(htm.getAsset());
+    FMT.print(htm.getGains());
+    FMT.print(htm.getLosses());
     
     
     
