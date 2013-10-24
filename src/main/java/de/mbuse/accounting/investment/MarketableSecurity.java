@@ -40,6 +40,41 @@ public class MarketableSecurity {
     journal.add(tx);
   }
   
+  public void sell(Date date, int amount, double pricePerShare, TAccount cash) {
+    double percentage = ((double) amount)/amountOfShares;
+    amountOfShares -= amount;
+    
+    double salesAmount = amount * pricePerShare;
+    double bookAmount = percentage * getBookValue();
+    
+    Transaction tx = new Transaction(date, "Selling " + amount + " shares of " + name + " for " + pricePerShare);
+    
+    tx.addDebit(cash, salesAmount);
+    tx.addCredit(asset, bookAmount);
+    
+    double gainOrLoss = salesAmount - bookAmount;
+    
+    if (method == Method.AVAILABLE_FOR_SALES) {
+      AccountingValue aociBalance = aoci.getBalance();
+      
+      double changeInAOCI = percentage * 
+              ((aociBalance.isDebit()) ? aociBalance.getDebit() : aociBalance.getCredit());
+      
+      if (aociBalance.isDebit()) {
+        tx.addCredit(aoci, changeInAOCI);
+      }
+      else {
+        tx.addDebit(aoci, changeInAOCI);
+      }
+    }
+    else {
+    }
+    
+    tx.plug(accountForGainsOrLosses(tx.isDebit()));
+    tx.postToAccounts();
+    journal.add(tx);
+  }
+  
   public void markToMarket(Date date, double marketPrice) {
     double fairValue = amountOfShares * marketPrice;
     double gainOrLoss = fairValue - getBookValue();
@@ -61,6 +96,11 @@ public class MarketableSecurity {
       journal.add(tx);
     }
   }
+ 
+  
+  private TAccount accountForGainsOrLosses(boolean isGain) {
+    return (isGain) ? this.gains : this.losses;
+  }
   
   private TAccount accountForMarkToMarketGainsOrLosses(boolean isGain) {
     if (method==Method.TRADING) {
@@ -78,6 +118,7 @@ public class MarketableSecurity {
     AccountingValue balance = asset.getBalance();
     return (balance.isDebit()) ? balance.getDebit() : -balance.getCredit();
   }
+  
 
   public TAccount getAsset() {
     return asset;

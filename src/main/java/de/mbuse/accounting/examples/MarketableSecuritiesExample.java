@@ -29,6 +29,9 @@ public class MarketableSecuritiesExample {
     ts.markToMarket(null, 27.);
     afs.markToMarket(null, 27.);
     
+    ts.sell(null, 70, 26., cash);
+    afs.sell(null, 70, 26., cash);
+    
     FMT.print(ts.getJournal());
     FMT.print(ts.getAsset());
     FMT.print(ts.getGains());
@@ -37,6 +40,8 @@ public class MarketableSecuritiesExample {
     FMT.print(afs.getJournal());
     FMT.print(afs.getAsset());
     FMT.print(afs.getAOCI());
+    FMT.print(afs.getGains());
+    FMT.print(afs.getLosses());
     
     
     
