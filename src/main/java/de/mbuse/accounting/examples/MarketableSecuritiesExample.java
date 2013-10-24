@@ -1,6 +1,7 @@
 package de.mbuse.accounting.examples;
 
 import de.mbuse.accounting.accounts.TAccount;
+import de.mbuse.accounting.investment.MarketableSecurity;
 import de.mbuse.accounting.journal.Transaction;
 import de.mbuse.accounting.util.Formatter;
 
@@ -15,70 +16,27 @@ public class MarketableSecuritiesExample {
   public static void main(String... args) {
     
     TAccount cash = new TAccount("Cash", TAccount.Type.ASSET);
-    TAccount tradingSec = new TAccount("Trading Securities", TAccount.Type.ASSET);
-    TAccount availForSaleSec = new TAccount("Available-for-Sale Securities", TAccount.Type.ASSET);
-    TAccount dividentRevenue = new TAccount("Dividend Revenues", TAccount.Type.REVENUE);
-    TAccount gainOnInvestments = new TAccount("Gain on Investments", TAccount.Type.REVENUE);
-    TAccount lossOnInvestments = new TAccount("Loss on Investments", TAccount.Type.EXPENSE);
-    TAccount aoci = new TAccount("Accum. Other Comprehensive Income", TAccount.Type.SHAREHOLDERS_EQUITY);
     
+    MarketableSecurity ts = new MarketableSecurity("Trading Security", MarketableSecurity.Method.TRADING);
+    MarketableSecurity afs = new MarketableSecurity("Avail-for-Sale", MarketableSecurity.Method.AVAILABLE_FOR_SALES);
     
-    Transaction tx;
+    ts.buy(null, 100, 25., cash);
+    afs.buy(null, 100, 25., cash);
     
-    tx = new Transaction(null, "Buying Trading Securities");
-    tx.addDebit(tradingSec, 100.)
-            .addCredit(cash, 100.).postToAccounts();
+    ts.markToMarket(null, 23.);
+    afs.markToMarket(null, 23.);
     
-    FMT.print(tx);
+    ts.markToMarket(null, 27.);
+    afs.markToMarket(null, 27.);
     
-    tx = new Transaction(null, "Buying AFS Securities");
-    tx.addDebit(availForSaleSec, 100.)
-            .addCredit(cash, 100.).postToAccounts();
+    FMT.print(ts.getJournal());
+    FMT.print(ts.getAsset());
+    FMT.print(ts.getGains());
+    FMT.print(ts.getLosses());
     
-    FMT.print(tx);
-    
-    tx = new Transaction(null, "Receiving Dividends on TS");
-    tx.addDebit(cash, 5.)
-            .addCredit(dividentRevenue, 5.).postToAccounts();
-    FMT.print(tx);
-    
-    tx = new Transaction(null, "Receiving Dividends on AFS")
-            .addDebit(cash, 5.)
-            .addCredit(dividentRevenue, 5.).postToAccounts();
-    FMT.print(tx);
-    
-    tx = new Transaction(null, "Report Mark-to-Market on TS");
-    tx.addDebit(tradingSec, 3.)
-            .addCredit(gainOnInvestments, 3.).postToAccounts();
-    FMT.print(tx);
-    
-    tx = new Transaction(null, "Report Mark-to-Market on AFS");
-    tx.addDebit(availForSaleSec, 3.)
-            .addCredit(aoci, 3.).postToAccounts();
-    FMT.print(tx);
-    
-    tx = new Transaction(null, "Selling TS")
-            .addDebit(cash, 101.)
-            .addDebit(lossOnInvestments, 2.)
-              .addCredit(tradingSec, 103.).postToAccounts();
-    FMT.print(tx);
-    
-    tx = new Transaction(null, "Selling AFS")
-            .addDebit(cash, 101.)
-            .addDebit(aoci, 3.)
-            .addCredit(gainOnInvestments, 1.)
-            .addCredit(availForSaleSec, 103.).postToAccounts();
-    
-    FMT.print(tx);
-    
-    
-    //===
-    
-    FMT.print(tradingSec);
-    FMT.print(availForSaleSec);
-    FMT.print(gainOnInvestments);
-    FMT.print(lossOnInvestments);
-    FMT.print(aoci);
+    FMT.print(afs.getJournal());
+    FMT.print(afs.getAsset());
+    FMT.print(afs.getAOCI());
     
     
     
