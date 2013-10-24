@@ -1,6 +1,5 @@
 package de.mbuse.accounting.investment;
 
-import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
 import de.mbuse.accounting.accounts.AccountingValue;
 import de.mbuse.accounting.accounts.TAccount;
 import de.mbuse.accounting.journal.Transaction;
