@@ -17,7 +17,7 @@ public class MarketableSecurity {
   public static enum Method {
     TRADING,
     AVAILABLE_FOR_SALES,
-    HOLD_TO_MATURITY
+    HELD_TO_MATURITY
   }
   
   public MarketableSecurity(String name, Method method) {
@@ -79,7 +79,7 @@ public class MarketableSecurity {
     double fairValue = amountOfShares * marketPrice;
     double gainOrLoss = fairValue - getBookValue();
     
-    if (gainOrLoss!=0. && method!=Method.HOLD_TO_MATURITY) {
+    if (gainOrLoss!=0. && method!=Method.HELD_TO_MATURITY) {
       boolean isGain = gainOrLoss>0.;
       TAccount gainOrLossAccount = accountForMarkToMarketGainsOrLosses(isGain);
       

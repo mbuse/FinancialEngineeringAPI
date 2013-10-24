@@ -19,7 +19,7 @@ public class MarketableSecuritiesExample {
     
     MarketableSecurity ts = new MarketableSecurity("Trading Security", MarketableSecurity.Method.TRADING);
     MarketableSecurity afs = new MarketableSecurity("Avail-for-Sale", MarketableSecurity.Method.AVAILABLE_FOR_SALES);
-    MarketableSecurity htm = new MarketableSecurity("Hold-To-Maturity", MarketableSecurity.Method.HOLD_TO_MATURITY);
+    MarketableSecurity htm = new MarketableSecurity("Hold-To-Maturity", MarketableSecurity.Method.HELD_TO_MATURITY);
     
     ts.buy(null, 100, 25., cash);
     afs.buy(null, 100, 25., cash);
