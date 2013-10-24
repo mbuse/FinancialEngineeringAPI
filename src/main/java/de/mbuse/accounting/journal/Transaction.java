@@ -55,13 +55,29 @@ public class Transaction {
     return this;
   }
   
-  public boolean isValid() {
-    double accu = 0.0;
-    for (Entry e : entries) {
-      accu += (e.isDebit()) ? e.getAmount() : - e.getAmount();
+  public Transaction plug(TAccount account) {
+    double accu = getBalance();
+    if (accu != 0.0) {
+      boolean debit = accu<0.0;
+      Entry e = new Entry(this, account, debit, (debit) ? -accu : accu);
+      entries.add(e);
     }
+    return this;
+  }
+  
+  public boolean isDebit() {
+    return getBalance() > 0.0;
+  }
+  
+  public boolean isCredit() {
+    return getBalance() < 0.0;
+  }
+  
+  public boolean isValid() {
+    double accu = getBalance();
     return accu == 0.0;
   }
+  
   
   public Transaction postToAccounts() {
     if (isValid()) {
@@ -87,6 +103,14 @@ public class Transaction {
     }
     debits.addAll(credits);
     this.entries = debits;
+  }
+
+  protected double getBalance() {
+    double accu = 0.0;
+    for (Entry e : entries) {
+      accu += (e.isDebit()) ? e.getAmount() : - e.getAmount();
+    }
+    return accu;
   }
     
   // === 
