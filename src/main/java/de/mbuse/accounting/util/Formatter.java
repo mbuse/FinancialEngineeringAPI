@@ -25,16 +25,30 @@ public class Formatter {
   public void setMoneyFormat(String pattern) {
     moneyFormat = new DecimalFormat(pattern);
   }
+  
   public void setMoneyFormat(DecimalFormat format) {
     moneyFormat = format;
   }
 
+  public DecimalFormat getMoneyFormat() {
+    return moneyFormat;
+  }
+  
+
   public void setDateFormat(DateFormat dateFormat) {
     this.dateFormat = dateFormat;
+  }
+
+  public DateFormat getDateFormat() {
+    return dateFormat;
   }
  
   public void setOut(PrintWriter out) {
     this.out = out;
+  }
+
+  public PrintWriter getOut() {
+    return out;
   }
   
   public void print(TAccount acc) {
@@ -113,8 +127,14 @@ public class Formatter {
     out.flush();
   }
   
-  private String formatDate(Date date) {
+  public String formatDate(Date date) {
     return (date==null) ? "n/a" : dateFormat.format(date);
+  }
+  
+  public String formatMoney(Double money) {
+    return (money==null) 
+            ? "n/a" : 
+            moneyFormat.format(money);
   }
   
   private List<String> alignStrings(List<String> lines, int minLength, boolean rightAlign) {
