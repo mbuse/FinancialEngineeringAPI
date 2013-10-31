@@ -26,6 +26,8 @@ public class Bond {
     this.journal = new ArrayList<Transaction>();
     this.bondsPayable = new TAccount("Bonds Payable (" + name + ")", TAccount.Type.LIABILITY);
     this.interestExpense = new TAccount("Interest Expense (" + name + ")", TAccount.Type.EXPENSE);
+    this.gainOnRetirement = new TAccount("Gain on Retirement (" + name + ")", TAccount.Type.REVENUE);
+    this.lossOnRetirement = new TAccount("Loss on Retirement (" + name + ")", TAccount.Type.EXPENSE);
   }
   
   // ===
@@ -55,6 +57,33 @@ public class Bond {
     tx.postToAccounts();
     journal.add(tx);
     periodsLeft--;
+  }
+  
+  public void retire(Date date, TAccount cash, double marketRate) {
+    double ratePerPeriod =  type==CouponPayment.SEMIANUALLY
+            ? marketRate/2
+            : marketRate;
+    double price = 0.;
+    for (int i=1; i<=periodsLeft; i++) {
+      price += Compounding.pv(coupon(), ratePerPeriod, i);
+    }
+    price += Compounding.pv(faceValue, ratePerPeriod, periodsLeft);
+    
+    
+    double balance = bondsPayable.getBalance().getCredit();
+    Transaction tx = new Transaction(date, "Retirement (" + name + ")");
+    tx.addDebit(bondsPayable, balance);
+    tx.addCredit(cash, price);
+    if (balance<price) {
+      // debit loss
+      tx.plug(lossOnRetirement);
+    }
+    else if (balance>price) { 
+      tx.plug(gainOnRetirement);
+    } 
+    tx.postToAccounts();
+    journal.add(tx);
+    periodsLeft = 0;
   }
   
   public void mature(Date date, TAccount cash) {
@@ -134,6 +163,14 @@ public class Bond {
     return interestExpense;
   }
 
+  public TAccount getGainOnRetirement() {
+    return gainOnRetirement;
+  }
+
+  public TAccount getLossOnRetirement() {
+    return lossOnRetirement;
+  }
+
   public List<Transaction> getJournal() {
     return journal;
   }
@@ -171,6 +208,8 @@ public class Bond {
   
   private TAccount bondsPayable;
   private TAccount interestExpense;
+  private TAccount gainOnRetirement;
+  private TAccount lossOnRetirement;
   private List<Transaction> journal;
   
 }
