@@ -1,5 +1,6 @@
 package de.mbuse.accounting.examples;
 
+import de.mbuse.accounting.accounts.AccumulatedTAccount;
 import de.mbuse.accounting.accounts.TAccount;
 import de.mbuse.accounting.accounts.TAccount.Type;
 import de.mbuse.accounting.journal.Transaction;
@@ -59,6 +60,10 @@ public class JournalEntryExample {
     FMT.print(inventory);
     FMT.print(mortgage);
     FMT.print(stocks);
+    
+    TAccount netCurrentAssets = new AccumulatedTAccount("Net Current Assets", Type.ASSET, cash, inventory);
+    
+    FMT.print(netCurrentAssets);
     
     
     
