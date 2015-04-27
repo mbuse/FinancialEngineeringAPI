@@ -16,7 +16,7 @@
   
   <scm>
     <connection>scm:git:ssh://github.com/mbuse/FinancialEngineeringAPI.git</connection>
-    <developerConnection>scm:git:ssh:github.com/mbuse/FinancialEngineeringAPI.git</developerConnection>
+    <developerConnection>scm:git:ssh://github.com/mbuse/FinancialEngineeringAPI.git</developerConnection>
 	<url>https://github.com/mbuse/FinancialEngineeringAPI</url>
 	<tag>HEAD</tag>
   </scm>
