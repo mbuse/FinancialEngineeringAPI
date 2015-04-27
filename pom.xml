@@ -15,10 +15,10 @@
   </organization>
   
   <scm>
-    <connection>scm:git:ssh://github.com/mbuse/FinancialEngineeringAPI.git</connection>
-    <developerConnection>scm:git:ssh://github.com/mbuse/FinancialEngineeringAPI.git</developerConnection>
-	<url>https://github.com/mbuse/FinancialEngineeringAPI</url>
-	<tag>HEAD</tag>
+    <connection>scm:git:file://.</connection>
+    <developerConnection>scm:git:file://.</developerConnection>
+    <url>scm:git:file://.</url>
+    <tag>HEAD</tag>
   </scm>
   
   <distributionManagement>
