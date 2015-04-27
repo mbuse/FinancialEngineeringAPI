@@ -37,6 +37,25 @@ The following features are implemented by this API.
 ## Optimization
  * [Non-Linear Powell Optimizer](src/main/java/de/mbuse/finance/optimization/Optimizer.java) A Non-Linear Optimizer based on the Powell Algorithm of Apache Commons Math3
 
+# Maven
+
+If you want to compile against this API using Apache Maven, just add the following lines to your pom.xml:
+
+    <repositories>
+      <repository>
+        <id>mbuse-mvn-repository</id>
+        <url>https://raw.github.com/mbuse/mvn-repository/releases/</url>
+      </repository>
+    </repositories>
+    
+    <dependencies>
+      <dependency>
+        <groupId>de.mbuse.finance</groupId>
+        <artifactId>financial-engineering</artifactId>
+        <version>1.1</version>
+      </dependency>
+    </dependencies>
+
 # Disclaimer
 
 This API contains functionality to calculate prices, payoffs, probabilities of financial assets
