@@ -3,7 +3,7 @@
 
   <groupId>de.mbuse.finance</groupId>
   <artifactId>financial-engineering</artifactId>
-  <version>1.1</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Financial Engineering API</name>
@@ -17,7 +17,7 @@
     <connection>scm:git:ssh://github.com/mbuse/FinancialEngineeringAPI.git</connection>
     <developerConnection>scm:git:ssh://github.com/mbuse/FinancialEngineeringAPI.git</developerConnection>
     <url>https://github.com/mbuse/FinancialEngineeringAPI</url>
-    <tag>financial-engineering-1.1</tag>
+    <tag>HEAD</tag>
   </scm>
   
   <distributionManagement>
