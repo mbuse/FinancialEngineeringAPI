@@ -15,9 +15,9 @@
   </organization>
   
   <scm>
-    <connection>scm:git:file://${project.basedir}</connection>
-    <developerConnection>scm:git:file://${project.basedir}</developerConnection>
-    <url>scm:git:file://${project.basedir}</url>
+    <connection>scm:git:file://localhost/${project.basedir}</connection>
+    <developerConnection>scm:git:file://localhost/${project.basedir}</developerConnection>
+    <url>scm:git:file://localhost/${project.basedir}</url>
     <tag>HEAD</tag>
   </scm>
   
