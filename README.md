@@ -21,7 +21,7 @@ The following features are implemented by this API.
  * [Stocks](src/main/java/de/mbuse/finance/binominal/security/Stock.java)
  * [Zero Coupon Bonds](src/main/java/de/mbuse/finance/binominal/security/ZeroCouponBond.java)
  * [Coupon Paying Bonds](src/main/java/de/mbuse/finance/binominal/security/CouponPayingBond.java)
- * [Defaultable Coupon Paying Bonds](src(main/java/de/mbuse/finance/binominal/security/DefaultableCouponPayingBond.java)
+ * [Defaultable Coupon Paying Bonds](src/main/java/de/mbuse/finance/binominal/security/DefaultableCouponPayingBond.java)
  * [Options](src/main/java/de/mbuse/finance/binominal/security/Option.java): American and European Call and Put Options on arbitrary securities
  * [Chooser Options](src/main/java/de/mbuse/finance/binominal/security/ChooserOption.java): A combination of a Call and a Put option
  * [Swaps](src/main/java/de/mbuse/finance/binominal/security/Swap.java)
